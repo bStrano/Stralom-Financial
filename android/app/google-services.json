@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "24200878019",
+    "project_id": "stralom-financial",
+    "storage_bucket": "stralom-financial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24200878019:android:c81a247e6dbd10324e0f76",
+        "android_client_info": {
+          "package_name": "com.stralom.financial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24200878019-ka3vnm4g9cibaphj8nkv0egmb48svbvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4S-7uTZPqEtC9MwiOumMW__xM2imujEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24200878019-ka3vnm4g9cibaphj8nkv0egmb48svbvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
