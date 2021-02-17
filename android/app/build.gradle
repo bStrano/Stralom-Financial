@@ -155,6 +155,14 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            // Note: CodePush updates shouldn't be tested in Debug mode as they're overriden by the RN packager. However, because CodePush checks for updates in all modes, we must supply a key.
+            resValue "string", "CodePushDeploymentKey", '""'
+        }
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"FdOrEgQW-8Zb51ocKlS7CvhgeAP5ekW9einyC"'
+            // Note: It's a good idea to provide matchingFallbacks for the new buildType you create to prevent build issues
+            // Add the following line if not already there
+            matchingFallbacks = ['release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -162,6 +170,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            resValue "string", "CodePushDeploymentKey", '"H_9gMD7iYiVZpjUW0PZ-dgd-Sc06UT53iTVvn"'
         }
     }
 
@@ -219,3 +228,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply plugin: 'com.google.gms.google-services'
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
