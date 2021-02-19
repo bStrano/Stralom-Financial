@@ -11,10 +11,12 @@
 import React from 'react';
 import {View} from 'react-native';
 import AppContainer from './src/navigators/AppContainer';
+import codePush from 'react-native-code-push';
 
 import Toast from 'react-native-toast-message';
 
 declare const global: {HermesInternal: null | {}};
+const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
 
 const App = () => {
   return (
@@ -29,4 +31,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default codePush(codePushOptions)(App);
