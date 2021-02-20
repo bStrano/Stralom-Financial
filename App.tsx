@@ -14,6 +14,8 @@ import AppContainer from './src/navigators/AppContainer';
 import codePush from 'react-native-code-push';
 
 import Toast from 'react-native-toast-message';
+import {ThemeProvider} from 'react-native-stralom-components';
+import theme from './src/constants/Theme';
 
 declare const global: {HermesInternal: null | {}};
 const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
@@ -21,7 +23,9 @@ const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
 const App = () => {
   return (
     <View style={{flex: 1}}>
-      <AppContainer isLoggedIn={true} />
+      <ThemeProvider initialTheme={theme}>
+        <AppContainer isLoggedIn={true} />
+      </ThemeProvider>
       <Toast
         ref={(ref: any) => {
           return Toast.setRef(ref);
