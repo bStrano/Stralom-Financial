@@ -1,7 +1,7 @@
 import React, {createContext} from 'react';
-import {View} from 'react-native';
+import {Dimensions, View} from 'react-native';
 import Tab from './components/Tab';
-import {FAB, useTheme} from 'react-native-stralom-components';
+import {FABGroupModal, useTheme} from 'react-native-stralom-components';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 
 // @ts-ignore
@@ -37,11 +37,62 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
           index={1}
         />
         <View style={{width: 50, marginHorizontal: 10}}>
-          <FAB
-            backgroundColor={theme.primary.light.color}
-            onPress={null}
-            style={{
-              container: {
+          <FABGroupModal
+            mainFabPosition={{
+              bottom: 0,
+              left: Dimensions.get('window').width / 2 - 25,
+            }}
+            mode={'circular-180'}
+            actions={[
+              {
+                label: 'Programadas',
+                onPress: () => console.log('Home'),
+                icon: {
+                  size: 28,
+                  name: 'calendar',
+                  color: 'blue',
+                  class: 'EvilIcons',
+                },
+                position: {
+                  bottom: 90,
+                  left: 0,
+                },
+                color: 'white',
+              },
+              {
+                label: 'Receita',
+                onPress: () => console.log('Receita'),
+                icon: {
+                  size: 18,
+                  name: 'trending-up',
+                  color: 'green',
+                  class: 'Feather',
+                },
+                position: {
+                  bottom: 30,
+                  left: -90,
+                },
+                color: 'white',
+              },
+              {
+                label: 'Despesas',
+                onPress: () => console.log('Despesas'),
+                icon: {
+                  size: 18,
+                  name: 'trending-down',
+                  color: 'red',
+                  class: 'Feather',
+                },
+                position: {
+                  bottom: 30,
+                  left: 90,
+                },
+                color: 'white',
+              },
+            ]}
+            fab={{
+              backgroundColor: theme.primary.light.color,
+              position: {
                 bottom: 20,
                 left: 0,
               },
