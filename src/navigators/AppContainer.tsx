@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import AuthenticationStack from './stacks/AuthenticationStack';
 import BottomTabNavigator from './stacks/BottomTabNavigator';
+import MainStack from './stacks/MainStack';
 
 interface IAppContainerProps {
   isLoggedIn: boolean;
@@ -12,7 +13,7 @@ interface IAppContainerProps {
 function AppContainer({isLoggedIn}: IAppContainerProps) {
   return (
     <NavigationContainer>
-      {isLoggedIn ? <BottomTabNavigator /> : <AuthenticationStack />}
+      {isLoggedIn ? <MainStack /> : <AuthenticationStack />}
     </NavigationContainer>
   );
 }

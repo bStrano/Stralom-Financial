@@ -61,7 +61,10 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
               },
               {
                 label: 'Receita',
-                onPress: () => console.log('Receita'),
+                onPress: () =>
+                  navigation.navigate('TransactionRegistrationScreen', {
+                    params: {type: 1},
+                  }),
                 icon: {
                   size: 18,
                   name: 'trending-up',
@@ -76,7 +79,12 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
               },
               {
                 label: 'Despesas',
-                onPress: () => console.log('Despesas'),
+                onPress: () =>
+                  navigation.navigate('Transactions', {
+                    screen: 'TransactionRegistration',
+                    initial: false,
+                    params: {type: 1},
+                  }),
                 icon: {
                   size: 18,
                   name: 'trending-down',

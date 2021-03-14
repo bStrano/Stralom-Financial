@@ -14,6 +14,9 @@
       "./assets/fonts"
     ]
   },
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "dependencies": {
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
@@ -28,17 +31,19 @@
     "lottie-react-native": "^3.5.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-authentication-module": "F:\\Projetos\\Authentication-Module",
     "react-native-code-push": "^7.0.0",
     "react-native-fbsdk": "^3.0.0",
     "react-native-gesture-handler": "^1.10.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.17.1",
+    "react-native-stralom-components": "F:\\Projetos\\react-native-stralom-components",
     "react-native-svg": "^12.1.0",
     "react-native-toast-message": "^1.4.6",
     "react-native-twitter-signin": "^1.1.1",
     "react-native-vector-icons": "^8.0.0",
-    "yarn": "^1.22.10"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
@@ -57,8 +62,6 @@
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "react-native-authentication-module": "D:/Ubuntu/Stralom/AuthenticationModule",
-    "react-native-stralom-components": "D:/Ubuntu/Stralom/react-native-stralom-components",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
   },
