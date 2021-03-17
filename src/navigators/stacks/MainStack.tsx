@@ -4,6 +4,7 @@ import RegistrationScreen from 'react-native-authentication-module/src/screens/R
 import {createStackNavigator} from '@react-navigation/stack';
 import TransactionRegisterScreen from '../../screens/Transactions/Register/TransactionRegisterScreen';
 import BottomTabNavigator from './BottomTabNavigator';
+import TransactionCategoryScreen from '../../screens/Transactions/Category/TransactionCategoryScreen';
 
 const Stack = createStackNavigator();
 function MainStack() {
@@ -17,6 +18,11 @@ function MainStack() {
       <Stack.Screen
         name="TransactionRegistrationScreen"
         component={TransactionRegisterScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="TransactionCategoryScreen"
+        component={TransactionCategoryScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

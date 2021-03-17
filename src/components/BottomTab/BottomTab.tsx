@@ -45,8 +45,8 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
             mode={'circular-180'}
             actions={[
               {
-                label: 'Programadas',
-                onPress: () => console.log('Home'),
+                label: 'CategoriasTemp',
+                onPress: () => navigation.navigate('TransactionCategoryScreen'),
                 icon: {
                   size: 28,
                   name: 'calendar',

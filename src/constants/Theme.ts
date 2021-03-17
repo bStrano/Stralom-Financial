@@ -114,7 +114,7 @@ const theme = {
     },
     subtitle: {
       fontFamily: fontFamily.medium,
-      fontSize: 12,
+      fontSize: 14,
     },
     regular: {
       fontFamily: fontFamily.regular,
