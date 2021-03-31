@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, FlatList} from 'react-native';
-import CategoryItem from './components/CategoryItem/CategoryItem';
-import TransactionCategory from '../../../models/transactions/TransactionCategory';
+import CategoryItem from './Content/CategoryItem/CategoryItem';
+import TransactionCategory from '../../../../models/transactions/TransactionCategory';
+import {FAB} from 'react-native-stralom-components';
+import CategoryRegisterModal from './Content/RegisterModal/CategoryRegisterModal';
 
 interface ITransactionCategoryScreenProps {}
 
-function TransactionCategoryScreen(props: ITransactionCategoryScreenProps) {
+function TransactionCategoryScreen() {
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
   return (
     <View style={{flex: 1}}>
       <Text>TransactionCategoryScreen</Text>
@@ -28,6 +32,11 @@ function TransactionCategoryScreen(props: ITransactionCategoryScreenProps) {
         ]}
         renderItem={({item}) => <CategoryItem category={item} />}
       />
+      <CategoryRegisterModal
+        isVisible={showRegisterModal}
+        setVisibility={setShowRegisterModal}
+      />
+      <FAB onPress={() => setShowRegisterModal(true)} />
     </View>
   );
 }

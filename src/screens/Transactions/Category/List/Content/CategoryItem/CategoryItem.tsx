@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import TransactionCategory from '../../../../../models/transactions/TransactionCategory';
+import TransactionCategory from '../../../../../../models/transactions/TransactionCategory';
 import {Text} from 'react-native-stralom-components';
 import CategoryIcon from './components/CategoryIcon';
 import ActionsButtons from './components/ActionsButtons';

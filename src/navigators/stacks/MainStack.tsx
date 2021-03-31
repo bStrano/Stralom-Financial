@@ -1,10 +1,8 @@
 import React from 'react';
-import LoginScreen from 'react-native-authentication-module/src/screens/Login/LoginScreen';
-import RegistrationScreen from 'react-native-authentication-module/src/screens/Register/RegistrationScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import TransactionRegisterScreen from '../../screens/Transactions/Register/TransactionRegisterScreen';
 import BottomTabNavigator from './BottomTabNavigator';
-import TransactionCategoryScreen from '../../screens/Transactions/Category/TransactionCategoryScreen';
+import TransactionCategoryScreen from '../../screens/Transactions/Category/List/TransactionCategoryScreen';
 
 const Stack = createStackNavigator();
 function MainStack() {

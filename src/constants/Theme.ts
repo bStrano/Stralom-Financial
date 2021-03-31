@@ -4,6 +4,7 @@ let fontFamily = {
   thin: 'Montserrat-Thin',
   light: 'Montserrat-Light',
   bold: 'Montserrat-Bold',
+  semiBold: 'Montserrat-SemiBold',
 };
 
 const theme = {
@@ -110,9 +111,13 @@ const theme = {
   typography: {
     title: {
       fontFamily: fontFamily.bold,
-      fontSize: 18,
+      fontSize: 14,
     },
     subtitle: {
+      fontFamily: fontFamily.semiBold,
+      fontSize: 14,
+    },
+    medium: {
       fontFamily: fontFamily.medium,
       fontSize: 14,
     },

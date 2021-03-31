@@ -4,7 +4,7 @@ import {Icon, useTheme} from 'react-native-stralom-components';
 
 interface IActionsButtonsProps {}
 
-function ActionsButtons(props: IActionsButtonsProps) {
+function ActionsButtons() {
   const theme = useTheme();
 
   return (
