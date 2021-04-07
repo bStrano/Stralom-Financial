@@ -16,6 +16,9 @@ import codePush from 'react-native-code-push';
 import Toast from 'react-native-toast-message';
 import {ThemeProvider} from 'react-native-stralom-components';
 import theme from './src/constants/Theme';
+import LocaleProvider from './src/providers/LocaleProvider';
+import locales from './src/locales/locales';
+import LanguageHelper from './src/utils/LanguageHelper';
 
 declare const global: {HermesInternal: null | {}};
 const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
@@ -24,7 +27,11 @@ const App = () => {
   return (
     <View style={{flex: 1}}>
       <ThemeProvider initialTheme={theme}>
-        <AppContainer isLoggedIn={true} />
+        <LocaleProvider
+          locales={locales}
+          language={LanguageHelper.getLanguage()}>
+          <AppContainer isLoggedIn={true} />
+        </LocaleProvider>
       </ThemeProvider>
       <Toast
         ref={(ref: any) => {
