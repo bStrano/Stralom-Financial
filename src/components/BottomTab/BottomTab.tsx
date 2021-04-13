@@ -3,6 +3,7 @@ import {Dimensions, View} from 'react-native';
 import Tab from './components/Tab';
 import {FABGroupModal, useTheme} from 'react-native-stralom-components';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import NavigatorEnum from '../../enums/NavigatorEnum';
 
 // @ts-ignore
 export const BottomTabContext = createContext<BottomTabBarProps>(null);
@@ -46,7 +47,8 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
             actions={[
               {
                 label: 'CategoriasTemp',
-                onPress: () => navigation.navigate('TransactionCategoryScreen'),
+                onPress: () =>
+                  navigation.navigate(NavigatorEnum.TransactionCategoryStack),
                 icon: {
                   size: 28,
                   name: 'calendar',

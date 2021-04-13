@@ -1,44 +1,45 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text, ButtonRounded} from 'react-native-stralom-components';
-import Modal from 'react-native-modal';
+import useLocale from '../../../../hooks/useLocale';
+import {useNavigation} from '@react-navigation/native';
 
 interface ICategoryRegisterModalProps {
   isVisible: boolean;
   setVisibility: (value: boolean) => void;
 }
 
-function CategoryRegisterModal(props: ICategoryRegisterModalProps) {
+function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
+  const {intl} = useLocale();
+  const navigation = useNavigation();
+  console.log(intl);
   return (
-    <Modal
-      testID={'modal'}
-      isVisible={props.isVisible}
-      style={styles.view}
-      animationInTiming={600}
-      animationOutTiming={600}>
+    <View style={styles.view}>
       <View style={styles.container}>
         <Text variant={'subtitle'} style={styles.title}>
-          Criar categoria
+          {intl!.category.registration.title}
         </Text>
+
         <View style={styles.buttonContainer}>
           <ButtonRounded
             mode={'outline'}
             stylesheet={{container: {flex: 1}}}
             color={'red'}
             fontColor={'white'}
-            label={'CANCELAR'}
-            onPress={() => props.setVisibility(false)}
+            label={intl!.commons.common.cancel}
+            onPress={() => navigation.goBack()}
           />
           <ButtonRounded
             mode={'normal'}
             stylesheet={{container: {flex: 1}}}
             color={'red'}
             fontColor={'white'}
-            label={'CONFIRMAR'}
+            label={intl!.commons.common.save}
+            onPress={() => navigation.goBack()}
           />
         </View>
       </View>
-    </Modal>
+    </View>
   );
 }
 
@@ -61,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoryRegisterModal;
+export default TransactionCategoryRegister;

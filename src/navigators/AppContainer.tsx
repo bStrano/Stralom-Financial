@@ -3,7 +3,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 import AuthenticationStack from './stacks/AuthenticationStack';
-import BottomTabNavigator from './stacks/BottomTabNavigator';
 import MainStack from './stacks/MainStack';
 
 interface IAppContainerProps {

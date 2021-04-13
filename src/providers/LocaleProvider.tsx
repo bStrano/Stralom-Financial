@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LocaleEnum from '../enums/LocaleEnum';
 import ILocale from '../locales/ILocale';
-import locales, {ILocales} from '../locales/locales';
+import {ILocales} from '../locales/locales';
 
 const initialState = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,17 +12,24 @@ const initialState = {
 
 interface ILocaleContext {
   changeLocale: (locale: LocaleEnum) => void;
-  locale: LocaleEnum | undefined;
-  intl: ILocale | undefined;
+  locale?: LocaleEnum;
+  intl?: ILocale;
 }
 
 interface ILocaleProviderProps {
   children: JSX.Element;
   locales: ILocales;
+  language: LocaleEnum;
+  defaultLocale: LocaleEnum;
 }
 
 export const LocaleContext = React.createContext<ILocaleContext>(initialState);
-function LocaleProvider(props: ILocaleProviderProps) {
+function LocaleProvider({
+  children,
+  locales,
+  language,
+  defaultLocale = LocaleEnum.pt_br,
+}: ILocaleProviderProps) {
   const [locale, setLocale] = useState<LocaleEnum | undefined>(
     initialState.locale,
   );
@@ -30,12 +37,21 @@ function LocaleProvider(props: ILocaleProviderProps) {
 
   function changeLocale(newLocale: LocaleEnum) {
     setLocale(newLocale);
-    setIntl(locales[newLocale]);
+    console.log('XX', locales, newLocale);
+    let newIntl = locales[newLocale];
+    if (!newIntl) {
+      newIntl = locales[defaultLocale];
+    }
+    setIntl(newIntl);
   }
+
+  useEffect(() => {
+    changeLocale(language);
+  }, [language]);
 
   return (
     <LocaleContext.Provider value={{changeLocale, locale, intl}}>
-      {props.children}
+      {children}
     </LocaleContext.Provider>
   );
 }
