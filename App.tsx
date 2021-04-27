@@ -10,15 +10,15 @@
 
 import React from 'react';
 import {View} from 'react-native';
-import AppContainer from './src/navigators/AppContainer';
+import AppContainer from './src/shared/navigators/AppContainer';
 import codePush from 'react-native-code-push';
 
 import Toast from 'react-native-toast-message';
 import {ThemeProvider} from 'react-native-stralom-components';
-import theme from './src/constants/Theme';
-import LocaleProvider from './src/providers/LocaleProvider';
-import locales from './src/locales/locales';
-import LanguageHelper from './src/utils/LanguageHelper';
+import theme from './src/shared/constants/Theme';
+import LocaleProvider from './src/shared/providers/LocaleProvider';
+import locales from './src/shared/locales/locales';
+import LanguageHelper from './src/shared/utils/LanguageHelper';
 
 declare const global: {HermesInternal: null | {}};
 const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
