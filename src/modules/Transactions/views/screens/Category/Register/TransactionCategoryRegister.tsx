@@ -29,7 +29,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
   // const onSubmit = (data) => console.log(data);
   const [colorPickerVisibility, setColorPickerVisibility] = useState(false);
   const [iconPickerVisibility, setIconPickerVisibility] = useState(false);
-  console.log(intl);
+
   return (
     <View style={styles.view}>
       <View style={styles.container}>
@@ -70,7 +70,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
                   class: ICON_CLASS.FontAwesome,
                 }}
                 selectedComponent={
-                  <ColorItem color={value} selected={false} size={24} />
+                  <ColorItem color={value} selected={false} size={21} />
                 }
               />
               <ColorSelectorModal
@@ -84,7 +84,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
           )}
           name="color"
           rules={{required: true}}
-          defaultValue=""
+          defaultValue="#75746e"
         />
 
         <Controller
@@ -104,13 +104,14 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
                   <IconItem
                     size={24}
                     icon={value}
-                    color={'#75746e'}
+                    color={control.fieldsRef.current.color!._f.value}
                     fontColor={'white'}
                     selected={false}
                   />
                 }
               />
               <IconSelectorModal
+                color={control.fieldsRef.current.color!._f.value}
                 title={'Color'}
                 onChange={onChange}
                 setVisibility={setIconPickerVisibility}
@@ -118,9 +119,9 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
               />
             </View>
           )}
-          name="firstName"
+          name="icon"
           rules={{required: true}}
-          defaultValue=""
+          defaultValue={{name: 'emoji-flirt', class: ICON_CLASS.Entypo}}
         />
 
         <View style={styles.buttonContainer}>

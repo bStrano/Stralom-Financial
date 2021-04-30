@@ -1,13 +1,13 @@
 import React from 'react';
 import {Pressable, View} from 'react-native';
-import {Icon, IIcon} from 'react-native-stralom-components';
+import {Icon, IIcon, SHADOW} from 'react-native-stralom-components';
 
 interface IColorItemProps {
   selected: boolean;
   color: string;
   fontColor: string;
   size?: number;
-  icon?: IIcon;
+  icon: IIcon;
   onPress?: () => void;
 }
 
@@ -16,6 +16,8 @@ function IconItem(props: IColorItemProps) {
     <Pressable onPress={props.onPress} disabled={!props.onPress}>
       <View
         style={{
+          ...SHADOW['2'],
+          overflow: 'hidden',
           justifyContent: 'center',
           alignItems: 'center',
           margin: 10,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, View} from 'react-native';
-import {Icon, ICON_CLASS} from 'react-native-stralom-components';
+import {Icon, ICON_CLASS, SHADOW} from 'react-native-stralom-components';
 
 interface IColorItemProps {
   selected: boolean;
@@ -14,6 +14,8 @@ function ColorItem(props: IColorItemProps) {
     <Pressable onPress={props.onPress} disabled={!props.onPress}>
       <View
         style={{
+          overflow: 'hidden',
+          ...SHADOW['2'],
           justifyContent: 'center',
           alignItems: 'center',
           margin: 10,

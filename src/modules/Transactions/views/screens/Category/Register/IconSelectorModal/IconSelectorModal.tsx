@@ -1,57 +1,46 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import Modal from 'react-native-modal';
-import {Divider, ICON_CLASS, Text} from 'react-native-stralom-components';
+import {StyleSheet} from 'react-native';
+import {ICON_CLASS, IIcon,} from 'react-native-stralom-components';
 import IconItem from './IconItem/IconItem';
 import icons from '../../../../../../../shared/constants/icons';
+import SelectorModal from '../SelectorModal/SelectorModal';
 
-interface IColorSelectorModalProps {
+interface IIconSelectorModalProps {
   title: string;
+  color: string;
   visibility: boolean;
   setVisibility: Dispatch<SetStateAction<boolean>>;
-  onChange: (color: string) => void;
+  onChange: (item: IIcon) => void;
 }
 
 function IconSelectorModal({
   title,
+  color,
   visibility,
   setVisibility,
   onChange,
-}: IColorSelectorModalProps) {
+}: IIconSelectorModalProps) {
   return (
-    <Modal
-      onBackdropPress={() => setVisibility(false)}
-      isVisible={visibility}
-      style={{
-        justifyContent: 'flex-end',
-        margin: 0,
-      }}>
-      <View style={styleSheet.container}>
-        <Text variant={'title'} style={styleSheet.title}>
-          {title}
-        </Text>
-        <Divider width={'94%'} style={{marginHorizontal: '3%'}} />
-        <FlatList
-          numColumns={5}
-          data={icons}
-          columnWrapperStyle={{
-            flex: 1,
-            justifyContent: 'space-around',
+    <SelectorModal
+      title={title}
+      visibility={visibility}
+      setVisibility={setVisibility}
+      numColumns={6}
+      data={icons}
+      renderItem={({item}) => (
+        <IconItem
+          size={item.class === ICON_CLASS.EvilIcons ? 50 : 35}
+          icon={item}
+          selected={false}
+          onPress={() => {
+            setVisibility(false);
+            onChange(item);
           }}
-          renderItem={({item}) => (
-            <IconItem
-              size={item.class === ICON_CLASS.EvilIcons ? 50 : 35}
-              icon={item}
-              selected={false}
-              onPress={() => {
-                setVisibility(false);
-                onChange(item);
-              }}
-            />
-          )}
+          color={color}
+          fontColor={'white'}
         />
-      </View>
-    </Modal>
+      )}
+    />
   );
 }
 
