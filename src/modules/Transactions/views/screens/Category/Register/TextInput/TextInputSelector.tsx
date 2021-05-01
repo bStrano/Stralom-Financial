@@ -25,7 +25,7 @@ function TextInputSelector(props: ITextInputSelectorProps) {
 
         {props.selectedComponent}
       </Pressable>
-      <Divider width={'100%'} />
+      <Divider width={'100%'} style={{marginVertical: 0}} />
     </View>
   );
 }

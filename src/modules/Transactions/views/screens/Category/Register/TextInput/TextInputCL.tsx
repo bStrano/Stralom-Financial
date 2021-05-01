@@ -14,7 +14,7 @@ function TextInputCL(props: ITextInputCLProps) {
         <Icon {...props.icon} size={18} container={styles.iconContainer} />
         <TextInput {...props} />
       </View>
-      {props.divider && <Divider />}
+      {props.divider && <Divider width={'100%'} style={{marginVertical: 0}} />}
     </View>
   );
 }

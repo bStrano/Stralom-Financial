@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {ButtonRounded, ICON_CLASS, Text} from 'react-native-stralom-components';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import {FAB, Header, ICON_CLASS, SHADOW, useTheme,} from 'react-native-stralom-components';
 import {useNavigation} from '@react-navigation/native';
 import useLocale from '../../../../../../shared/hooks/useLocale';
 import TextInputCL from './TextInput/TextInputCL';
@@ -18,35 +18,47 @@ interface ICategoryRegisterModalProps {
 
 function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
   const {intl} = useLocale();
+  const theme = useTheme();
   const navigation = useNavigation();
   const {
     control,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     handleSubmit,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     formState: {errors},
   } = useForm();
-  // const onSubmit = (data) => console.log(data);
   const [colorPickerVisibility, setColorPickerVisibility] = useState(false);
   const [iconPickerVisibility, setIconPickerVisibility] = useState(false);
 
+  const onSubmit = (data) => {
+    console.log(data);
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.view}>
+      <Header
+        title={intl!.category.registration.title}
+        fontFamily={'Montserrat-Medium'}
+        fontColor={'black'}
+        iconLeft={{
+          name: 'close',
+          class: ICON_CLASS.MaterialIcons,
+          onPress: () => {
+            navigation.goBack();
+          },
+        }}
+      />
       <View style={styles.container}>
-        <Text variant={'subtitle'} style={styles.title}>
-          {intl!.category.registration.title}
-        </Text>
-
         <Controller
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <TextInputCL
-              placeholder={'Description'}
+              placeholder={intl!.commons.glossary.description}
               value={value}
               onChange={onChange}
               onBlur={onBlur}
               divider={true}
-              icon={{name: 'phone', class: ICON_CLASS.MaterialIcons}}
+              icon={{name: 'microphone', class: ICON_CLASS.FontAwesome}}
             />
           )}
           name="firstName"
@@ -62,7 +74,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
                 onPress={() => {
                   setColorPickerVisibility(true);
                 }}
-                placeholder={'Color'}
+                placeholder={intl!.commons.glossary.color}
                 value={value}
                 onBlur={onBlur}
                 icon={{
@@ -74,7 +86,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
                 }
               />
               <ColorSelectorModal
-                title={'Color'}
+                title={intl!.commons.glossary.color}
                 onChange={onChange}
                 selectedColor={value}
                 setVisibility={setColorPickerVisibility}
@@ -95,7 +107,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
                 onPress={() => {
                   setIconPickerVisibility(true);
                 }}
-                placeholder={'Icon'}
+                placeholder={intl!.commons.glossary.icon}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
@@ -112,7 +124,7 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
               />
               <IconSelectorModal
                 color={control.fieldsRef.current.color!._f.value}
-                title={'Color'}
+                title={intl!.commons.glossary.icon}
                 onChange={onChange}
                 setVisibility={setIconPickerVisibility}
                 visibility={iconPickerVisibility}
@@ -123,40 +135,41 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
           rules={{required: true}}
           defaultValue={{name: 'emoji-flirt', class: ICON_CLASS.Entypo}}
         />
-
-        <View style={styles.buttonContainer}>
-          <ButtonRounded
-            mode={'outline'}
-            stylesheet={{container: {flex: 1}}}
-            color={'red'}
-            fontColor={'white'}
-            label={intl!.commons.common.cancel}
-            onPress={() => navigation.goBack()}
-          />
-          <ButtonRounded
-            mode={'normal'}
-            stylesheet={{container: {flex: 1}}}
-            color={'red'}
-            fontColor={'white'}
-            label={intl!.commons.common.save}
-            onPress={() => navigation.goBack()}
-          />
-        </View>
       </View>
+
+      <FAB
+        icon={{
+          name: 'check',
+          class: ICON_CLASS.MaterialIcons,
+          color: theme.success.main.font,
+        }}
+        position={{
+          bottom: 25,
+          left: Dimensions.get('window').width / 2 - 45 / 2,
+          right: 0,
+        }}
+        style={{
+          fabContainer: {...SHADOW['5']},
+        }}
+        backgroundColor={theme.success.main.color}
+        size={45}
+        onPress={handleSubmit(onSubmit)}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   view: {
-    justifyContent: 'flex-end',
+    flex: 1,
+    backgroundColor: 'white',
     margin: 0,
   },
   container: {
     backgroundColor: 'white',
     paddingVertical: 10,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
   title: {
     padding: 10,

@@ -10,7 +10,11 @@ export default interface ILocaleCommons {
     home: string;
     transaction: string;
     category: string;
+    subcategory: string;
     statistics: string;
     options: string;
+    description: string;
+    color: string;
+    icon: string;
   };
 }

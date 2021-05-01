@@ -1,4 +1,5 @@
 import ILocale from './ILocale';
+import _ from 'lodash';
 
 const commons = {
   common: {
@@ -13,15 +14,21 @@ const commons = {
     home: 'Home',
     transaction: 'Transação',
     category: 'Categoria',
+    subcategory: 'Subcategoria',
     statistics: 'Estatistica',
     options: 'Opções',
+    description: 'Descrição',
+    color: 'Cor',
+    icon: 'Icone',
   },
 };
 
 const pt_br: ILocale = {
   category: {
     registration: {
-      title: `${commons.common.create} ${commons.glossary.category}`,
+      title: _.capitalize(
+        `${commons.common.create} nova ${commons.glossary.category}`,
+      ),
     },
   },
   commons,
