@@ -18,6 +18,7 @@
     "styled-components": "^5"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^10.8.0",
@@ -26,6 +27,8 @@
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.2",
     "add": "^2.0.6",
+    "axios": "^0.21.1",
+    "lodash": "^4.17.21",
     "lottie-ios": "3.1.8",
     "lottie-react-native": "^3.5.0",
     "react": "^17.0.2",
@@ -44,6 +47,7 @@
     "react-native-toast-message": "^1.4.6",
     "react-native-twitter-signin": "^1.1.1",
     "react-native-vector-icons": "^8.0.0",
+    "react-query": "^3.15.2",
     "realm": "^10.3.0",
     "styled-components": "^5.2.1"
   },
@@ -55,6 +59,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@types/axios": "^0.14.0",
     "@types/jest": "^25.2.3",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.63.49",
@@ -67,6 +72,7 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
+    "reactotron-react-native": "^5.0.0",
     "typescript": "^3.8.3"
   },
   "jest": {

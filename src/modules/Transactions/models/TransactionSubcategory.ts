@@ -1,7 +1,7 @@
 import Realm from 'realm';
 import TransactionCategory from './TransactionCategory';
 
-interface ITransactionSubcategory {
+interface ITransactionSubcategory extends Realm.Object {
   name: string;
   user: number;
   category: Realm.Results<TransactionCategory> | TransactionCategory;
@@ -10,9 +10,7 @@ interface ITransactionSubcategory {
 class TransactionSubcategory {
   private readonly _name: string = '';
   private readonly _user: number = -1;
-  private readonly _category:
-    | Realm.Results<TransactionCategory>
-    | TransactionCategory;
+  private readonly _category: Realm.Results<TransactionCategory> | TransactionCategory | null;
 
   private static _schema: Realm.ObjectSchema = {
     name: 'TransactionSubcategory',
@@ -38,7 +36,7 @@ class TransactionSubcategory {
     return this._user;
   }
 
-  get category(): Realm.Results<TransactionCategory> | TransactionCategory {
+  get category(): Realm.Results<TransactionCategory> | TransactionCategory | null {
     return this._category;
   }
 

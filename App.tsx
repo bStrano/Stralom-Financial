@@ -19,20 +19,21 @@ import theme from './src/shared/constants/Theme';
 import LocaleProvider from './src/shared/providers/LocaleProvider';
 import locales from './src/shared/locales/locales';
 import LanguageHelper from './src/shared/utils/LanguageHelper';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 declare const global: {HermesInternal: null | {}};
 const codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
-
+const queryClient = new QueryClient();
 const App = () => {
   return (
     <View style={{flex: 1}}>
-      <ThemeProvider initialTheme={theme}>
-        <LocaleProvider
-          locales={locales}
-          language={LanguageHelper.getLanguage()}>
-          <AppContainer isLoggedIn={true} />
-        </LocaleProvider>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider initialTheme={theme}>
+          <LocaleProvider locales={locales} language={LanguageHelper.getLanguage()}>
+            <AppContainer isLoggedIn={true} />
+          </LocaleProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
       <Toast
         ref={(ref: any) => {
           return Toast.setRef(ref);

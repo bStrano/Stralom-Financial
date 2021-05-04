@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Icon, IIcon} from 'react-native-stralom-components';
+import {Icon, IIcon, SHADOW} from 'react-native-stralom-components';
 
 interface ICategoryIconProps {
   icon: IIcon;
@@ -23,6 +23,7 @@ function CategoryIcon({icon, color, size = 48}: ICategoryIconProps) {
 const stylesheet = ({size, color}: any) =>
   StyleSheet.create({
     container: {
+      ...SHADOW['1'],
       backgroundColor: color,
       width: size,
       height: size,

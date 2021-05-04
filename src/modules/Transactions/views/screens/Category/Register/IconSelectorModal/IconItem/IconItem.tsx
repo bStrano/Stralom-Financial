@@ -26,11 +26,7 @@ function IconItem(props: IColorItemProps) {
           borderRadius: props.size && props.size / 2,
           backgroundColor: props.color,
         }}>
-        <Icon
-          size={props.size && props.size / 2}
-          color={props.fontColor}
-          {...props.icon}
-        />
+        <Icon size={props.size && props.size / 2} color={props.fontColor} name={props.icon.name} class={props.icon.class} />
       </View>
     </Pressable>
   );

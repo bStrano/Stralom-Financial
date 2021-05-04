@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {StyleSheet} from 'react-native';
-import {ICON_CLASS, IIcon,} from 'react-native-stralom-components';
+import {ICON_CLASS, IIcon} from 'react-native-stralom-components';
 import IconItem from './IconItem/IconItem';
 import icons from '../../../../../../../shared/constants/icons';
 import SelectorModal from '../SelectorModal/SelectorModal';
@@ -13,13 +13,7 @@ interface IIconSelectorModalProps {
   onChange: (item: IIcon) => void;
 }
 
-function IconSelectorModal({
-  title,
-  color,
-  visibility,
-  setVisibility,
-  onChange,
-}: IIconSelectorModalProps) {
+function IconSelectorModal({title, color, visibility, setVisibility, onChange}: IIconSelectorModalProps) {
   return (
     <SelectorModal
       title={title}

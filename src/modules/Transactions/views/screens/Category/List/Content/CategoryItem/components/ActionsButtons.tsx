@@ -9,23 +9,23 @@ function ActionsButtons() {
 
   return (
     <View style={styles.container}>
+      {/*<Icon*/}
+      {/*  name={'add-circle'}*/}
+      {/*  class={'MaterialIcons'}*/}
+      {/*  color={theme.primary.main.color}*/}
+      {/*  size={22}*/}
+      {/*  container={{*/}
+      {/*    style: {*/}
+      {/*      marginHorizontal: 25,*/}
+      {/*    },*/}
+      {/*  }}*/}
+      {/*  onPress={() => console.log('Create subcategory')}*/}
+      {/*/>*/}
       <Icon
-        name={'add-circle'}
+        name={'more-vert'}
         class={'MaterialIcons'}
         color={theme.primary.main.color}
-        size={26}
-        container={{
-          style: {
-            marginHorizontal: 25,
-          },
-        }}
-        onPress={() => console.log('Create subcategory')}
-      />
-      <Icon
-        name={'edit'}
-        class={'MaterialIcons'}
-        color={theme.primary.main.color}
-        size={26}
+        size={18}
         container={{
           style: {
             marginRight: 10,
