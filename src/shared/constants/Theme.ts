@@ -103,6 +103,7 @@ const theme = {
   border: 'black',
   fontFamily: {
     regular: fontFamily.regular,
+    semiBold: fontFamily.semiBold,
     medium: fontFamily.medium,
     thin: fontFamily.thin,
     light: fontFamily.light,
