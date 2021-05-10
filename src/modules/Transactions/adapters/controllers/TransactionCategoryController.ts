@@ -5,7 +5,7 @@ import Realm from 'realm';
 
 export default class TransactionCategoryController {
   static async save(transactionCategory: TransactionCategory) {
-    transactionCategory = await TransactionCategoryAPI.save(transactionCategory);
+    await TransactionCategoryAPI.save(transactionCategory);
     return await TransactionCategoryRepository.save(transactionCategory);
   }
 

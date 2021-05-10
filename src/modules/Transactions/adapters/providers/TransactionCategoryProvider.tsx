@@ -9,7 +9,7 @@ interface ITransactionCategoryProviderProps {
 }
 
 interface ITransactionCategoryContext {
-  save: (transactionCategory: TransactionCategory) => Promise<TransactionCategory>;
+  save: (transactionCategory: TransactionCategory) => Promise<void>;
   synchronize: () => Promise<Results<Object>>;
   categories: QueryObserverResult<Results<TransactionCategory>, TransactionCategory>;
 }
@@ -17,13 +17,12 @@ interface ITransactionCategoryContext {
 export const TransactionCategoryContext = createContext<ITransactionCategoryContext | null>(null);
 function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
   const categories = useQuery('categories', () => synchronize());
-
   async function save(transactionCategory: TransactionCategory) {
     try {
+      return await TransactionCategoryController.save(transactionCategory);
     } catch (e) {
       console.error(e);
     }
-    return await TransactionCategoryController.save(transactionCategory);
   }
 
   async function synchronize() {

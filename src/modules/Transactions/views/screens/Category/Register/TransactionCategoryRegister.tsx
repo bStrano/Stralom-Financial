@@ -13,6 +13,7 @@ import IconItem from './IconSelectorModal/IconItem/IconItem';
 import TransactionCategory from '../../../../models/TransactionCategory';
 import {TransactionCategoryContext} from '../../../../adapters/providers/TransactionCategoryProvider';
 import Reactotron from 'reactotron-react-native';
+import TransactionSubcategory from '../../../../models/TransactionSubcategory';
 
 interface ICategoryRegisterModalProps {
   isVisible: boolean;
@@ -50,8 +51,6 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
 
   // const onSubmit = (data) => Reactotron.log!(data);
   const onSubmit = (data: any) => {
-    Reactotron.log!('Data', data);
-
     transactionCategoryContext?.save(new TransactionCategory(data));
     navigation.goBack();
   };
@@ -158,7 +157,18 @@ function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
                 fontSize={14}
                 initialValue={value}
                 placeholder={'Adicionar subcategorias'}
-                onItemChange={onChange}
+                onItemChange={(data) => {
+                  Reactotron.log!(data);
+                  let subcategories = data.map((item) => {
+                    if (item instanceof TransactionSubcategory) {
+                      return item;
+                    } else {
+                      return new TransactionSubcategory({name: item.value, category: undefined});
+                    }
+                  });
+
+                  onChange(subcategories);
+                }}
                 inputPosition={'top'}
                 showCheckbox={false}
                 focusOnSubmit={false}

@@ -1,47 +1,48 @@
 import Realm from 'realm';
 import TransactionCategory from './TransactionCategory';
+import {v4 as uuidv4} from 'uuid';
+import Reactotron from 'reactotron-react-native';
 
-interface ITransactionSubcategory extends Realm.Object {
+interface ITransactionSubcategory {
+  _id?: string;
   name: string;
-  user: number;
-  category: Realm.Results<TransactionCategory> | TransactionCategory;
+  category?: Realm.Results<TransactionCategory> | TransactionCategory;
 }
 
 class TransactionSubcategory {
-  private readonly _name: string = '';
-  private readonly _user: number = -1;
-  private readonly _category: Realm.Results<TransactionCategory> | TransactionCategory | null;
+  _id?: string;
+  name: string = '';
+  category?: Realm.Results<TransactionCategory> | TransactionCategory | null;
 
+  private static _collectionName = 'TransactionSubcategory';
   private static _schema: Realm.ObjectSchema = {
     name: 'TransactionSubcategory',
+    primaryKey: '_id',
     properties: {
+      _id: {type: 'string'},
       name: {type: 'string', indexed: true},
-      user: 'string',
-      category: 'TransactionCategory',
-      created_at: {type: 'date', default: new Date(), mapTo: 'createdAt'},
+      category: {type: 'linkingObjects', objectType: 'TransactionCategory', property: 'subcategories'},
+      created_at: {type: 'date', default: new Date(), mapTo: 'createdAt', optional: true},
     },
   };
 
-  constructor({name, user, category}: ITransactionSubcategory) {
-    this._name = name;
-    this._user = user;
-    this._category = category;
-  }
-
-  get name(): string {
-    return this._name;
-  }
-
-  get user(): number {
-    return this._user;
-  }
-
-  get category(): Realm.Results<TransactionCategory> | TransactionCategory | null {
-    return this._category;
+  constructor({_id, name, category}: ITransactionSubcategory) {
+    if (!_id) {
+      Reactotron.log!('V4', uuidv4());
+      this._id = uuidv4();
+    } else {
+      this._id = _id;
+    }
+    this.name = name;
+    this.category = category;
   }
 
   static get schema(): Realm.ObjectSchema {
     return this._schema;
+  }
+
+  static get collectionName(): string {
+    return this._collectionName;
   }
 }
 

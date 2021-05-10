@@ -3,20 +3,44 @@ import ENDPOINTS from '../../../../shared/constants/Endpoints';
 import TransactionCategory from '../../models/TransactionCategory';
 import TransactionCategoryIcon from '../../models/TransactionCategoryIcon';
 import Reactotron from 'reactotron-react-native';
+import TransactionSubcategory from '../../models/TransactionSubcategory';
+import _ from 'lodash';
+
+interface IFindAllReturn {
+  name: string;
+  color: string;
+  icon: number;
+  _id: string;
+  createdAt: string;
+  subcategories: [
+    {
+      _id: string;
+      name: string;
+      category: string;
+    },
+  ];
+}
 
 class TransactionCategoryAPI {
   static async findAll() {
-    const {data} = await axiosCore.get(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY);
-    return data.map(({name, color, icon, id, createdAt}: {name: string; color: string; icon: number; id: string; createdAt: Date}) => {
-      return new TransactionCategory({name, color, icon: new TransactionCategoryIcon({id: icon}), subcategories: [], id, createdAt});
+    const {data} = <{data: IFindAllReturn[]}> await axiosCore.get(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY);
+
+    return data.map(({name, color, icon, _id, createdAt, subcategories}) => {
+      let transactionCategory = new TransactionCategory({name, color, icon: new TransactionCategoryIcon({id: icon}), subcategories: [], _id, createdAt: new Date(createdAt)});
+      transactionCategory.subcategories = subcategories.map((subcategory) => {
+        return new TransactionSubcategory({
+          _id: subcategory._id,
+          name: subcategory.name,
+          category: _.cloneDeep(transactionCategory),
+        });
+      });
+      return transactionCategory;
     });
   }
 
   static async save(transactionCategory: TransactionCategory) {
-    Reactotron.log!({...transactionCategory}, transactionCategory.icon.id);
     const {data} = await axiosCore.post(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY, {...transactionCategory, icon: transactionCategory.icon.id});
     Reactotron.log!(data);
-    transactionCategory.id = data?.id;
     return transactionCategory;
   }
 }
