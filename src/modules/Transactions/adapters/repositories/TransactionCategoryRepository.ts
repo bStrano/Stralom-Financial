@@ -23,7 +23,7 @@ export default class TransactionCategoryRepository {
           return new TransactionSubcategory({
             _id: transactionSubcategory._id,
             name: transactionSubcategory.name,
-            category: transactionCategoryNew.toJSON()
+            category: transactionCategoryNew.toJSON(),
           });
         });
       });

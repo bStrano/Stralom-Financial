@@ -15,6 +15,7 @@ interface ISessionContext {
   user: IUserSession | null;
   hasSession: boolean;
   createSession: (props: IUserSession) => Promise<void>;
+  updateAccessToken: (accessToken: string) => void;
   restoreSession: () => Promise<void>;
   clearSession: () => void;
 }
@@ -45,7 +46,13 @@ function SessionProvider(props: ISessionProviderProps) {
     setUser({accessToken, id, name});
   }
 
-  return <SessionContext.Provider value={{user, createSession, restoreSession, clearSession, hasSession}}>{props.children}</SessionContext.Provider>;
+  async function updateAccessToken(accessToken: string) {
+    if (user) {
+      setUser({...user, accessToken});
+    }
+  }
+
+  return <SessionContext.Provider value={{user, createSession, restoreSession, clearSession, updateAccessToken, hasSession}}>{props.children}</SessionContext.Provider>;
 }
 
 export default SessionProvider;

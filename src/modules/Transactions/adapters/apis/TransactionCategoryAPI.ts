@@ -23,7 +23,7 @@ interface IFindAllReturn {
 
 class TransactionCategoryAPI {
   static async findAll() {
-    const {data} = <{data: IFindAllReturn[]}> await axiosCore.get(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY);
+    const {data} = <{data: IFindAllReturn[]}> await axiosCore.get(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY, {params: {subcategories: true}});
 
     return data.map(({name, color, icon, _id, createdAt, subcategories}) => {
       let transactionCategory = new TransactionCategory({name, color, icon: new TransactionCategoryIcon({id: icon}), subcategories: [], _id, createdAt: new Date(createdAt)});

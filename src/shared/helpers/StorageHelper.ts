@@ -11,6 +11,14 @@ export default class StorageHelper {
     await AsyncStorage.setItem(StorageHelper.ID, id);
   }
 
+  static async getToken() {
+    return await AsyncStorage.getItem(StorageHelper.ACCESS_TOKEN);
+  }
+
+  static async updateToken(accessToken: string) {
+    await AsyncStorage.setItem(StorageHelper.ACCESS_TOKEN, accessToken);
+  }
+
   static async restoreSession() {
     let accessToken = await AsyncStorage.getItem(StorageHelper.ACCESS_TOKEN);
     let name = await AsyncStorage.getItem(StorageHelper.NAME);
