@@ -23,6 +23,7 @@ function IconSelectorModal({title, color, visibility, setVisibility, onChange}: 
       data={icons}
       renderItem={({item}) => (
         <IconItem
+          key={item.id}
           size={item.class === ICON_CLASS.EvilIcons ? 50 : 35}
           icon={item}
           selected={false}

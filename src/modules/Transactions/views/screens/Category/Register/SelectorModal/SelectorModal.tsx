@@ -13,14 +13,7 @@ export interface ISelectorProps {
   renderItem: ({item, index}: {item: any; index: number}) => JSX.Element;
 }
 
-function SelectorModal<T>({
-  title,
-  visibility,
-  setVisibility,
-  data,
-  numColumns,
-  renderItem,
-}: ISelectorProps) {
+function SelectorModal<T>({title, visibility, setVisibility, data, numColumns, renderItem}: ISelectorProps) {
   return (
     <Modal
       onBackdropPress={() => setVisibility(false)}
@@ -35,12 +28,7 @@ function SelectorModal<T>({
           {title}
         </Text>
         <Divider width={'94%'} style={{marginHorizontal: '3%'}} />
-        <FlatList
-          columnWrapperStyle={{justifyContent: 'space-between'}}
-          numColumns={numColumns}
-          data={data}
-          renderItem={renderItem}
-        />
+        <FlatList keyExtractor={(item) => item.key || item.id} columnWrapperStyle={{justifyContent: 'space-between'}} numColumns={numColumns} data={data} renderItem={renderItem} />
       </View>
     </Modal>
   );

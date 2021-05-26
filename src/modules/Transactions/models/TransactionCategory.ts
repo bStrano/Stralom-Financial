@@ -32,7 +32,7 @@ class TransactionCategory {
     } else {
       this._id = _id;
     }
-    if (!createdAt) {
+    if (!createdAt || isNaN(createdAt.getTime())) {
       this.createdAt = new Date();
     } else {
       this.createdAt = new Date(createdAt);

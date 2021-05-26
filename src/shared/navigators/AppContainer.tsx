@@ -18,7 +18,7 @@ function AppContainer() {
           onSuccess={(data: IUser) => {
             sessionContext?.createSession({id: String(data.id), accessToken: data.accessToken, name: data.name});
           }}
-          onError={(e: Error) => console.error(e)}
+          onError={(e: Error) => console.error('Error', e)}
         />
       )}
     </NavigationContainer>

@@ -15,12 +15,9 @@ import {TransactionCategoryContext} from '../../../../adapters/providers/Transac
 import Reactotron from 'reactotron-react-native';
 import TransactionSubcategory from '../../../../models/TransactionSubcategory';
 
-interface ICategoryRegisterModalProps {
-  isVisible: boolean;
-  setVisibility: (value: boolean) => void;
-}
+interface ICategoryRegisterModalProps {}
 
-function TransactionCategoryRegister(props: ICategoryRegisterModalProps) {
+function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
   const {intl} = useLocale();
   const theme = useTheme();
   const navigation = useNavigation();
@@ -226,4 +223,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TransactionCategoryRegister;
+export default TransactionCategoryRegisterScreen;

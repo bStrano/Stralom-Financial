@@ -42,8 +42,12 @@ function SessionProvider(props: ISessionProviderProps) {
   }
 
   async function restoreSession() {
-    let {accessToken, id, name}: IUserSession = await StorageHelper.restoreSession();
-    setUser({accessToken, id, name});
+    try {
+      let {accessToken, id, name}: IUserSession = await StorageHelper.restoreSession();
+      setUser({accessToken, id, name});
+    } catch (e) {
+      console.warn(e);
+    }
   }
 
   async function updateAccessToken(accessToken: string) {

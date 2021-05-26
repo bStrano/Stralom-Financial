@@ -18,6 +18,7 @@ function AuthenticationStack(props: IAuthenticationStackProps) {
         component={LoginScreen}
         initialParams={{
           onSuccess: (data: IUser) => {
+            console.log('ZZ');
             props.onSuccess(data);
           },
           onError: (error: Error) => props.onError(error),

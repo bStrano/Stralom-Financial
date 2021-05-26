@@ -37,7 +37,7 @@ function BaseHeader(props: IBaseHeaderProps) {
     }
   }, [props.type, props.iconLeft]);
 
-  return <Header {...props} fontColor={theme.primary.main.font} title={'Minhas categorias'} fontFamily={theme.fontFamily.medium} iconLeft={iconLeft} />;
+  return <Header {...props} fontColor={theme.primary.main.font} title={props.title} fontFamily={theme.fontFamily.medium} iconLeft={iconLeft} />;
 }
 
 export default BaseHeader;

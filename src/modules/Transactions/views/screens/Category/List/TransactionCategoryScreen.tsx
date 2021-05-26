@@ -17,8 +17,7 @@ function TransactionCategoryScreen() {
   return (
     <View style={{flex: 1, backgroundColor: theme.surface}}>
       <BaseHeader title={'Minhas categorias'} type={NAVIGATION_TYPE.BACK} />
-
-      <FlatList data={transactionCategoryContext?.categories.data} renderItem={({item}) => <CategoryItem category={item} />} />
+      <FlatList keyExtractor={(item) => item.name} data={transactionCategoryContext?.categories.data} renderItem={({item}) => <CategoryItem category={item} />} />
       <FAB onPress={() => navigation.navigate(ScreenEnum.TransactionCategoryRegistration)} />
     </View>
   );

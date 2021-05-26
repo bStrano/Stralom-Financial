@@ -2,7 +2,6 @@ import TransactionCategory from '../../models/TransactionCategory';
 import getRealm from '../../../../shared/infra/realm/realm';
 import Reactotron from 'reactotron-react-native';
 import Realm, {Results} from 'realm';
-import TransactionSubcategory from '../../models/TransactionSubcategory';
 
 export default class TransactionCategoryRepository {
   static async save(transactionCategory: TransactionCategory) {
@@ -19,13 +18,14 @@ export default class TransactionCategoryRepository {
       transactionCategories.forEach((transactionCategory) => {
         // @ts-ignore
         const transactionCategoryNew = <Realm.Object<TransactionCategory>>realm.create(TransactionCategory.collectionName, transactionCategory, update);
-        transactionCategoryNew.subcategories = transactionCategoryNew.subcategories!.map((transactionSubcategory: TransactionSubcategory) => {
-          return new TransactionSubcategory({
-            _id: transactionSubcategory._id,
-            name: transactionSubcategory.name,
-            category: transactionCategoryNew.toJSON(),
-          });
-        });
+        console.log(transactionCategoryNew);
+        // transactionCategoryNew.subcategories = transactionCategoryNew.subcategories!.map((transactionSubcategory: TransactionSubcategory) => {
+        //   return new TransactionSubcategory({
+        //     _id: transactionSubcategory._id,
+        //     name: transactionSubcategory.name,
+        //     category: transactionCategoryNew.toJSON(),
+        //   });
+        // });
       });
     });
   }

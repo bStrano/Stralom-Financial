@@ -63,11 +63,14 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@testing-library/jest-native": "^4.0.1",
+    "@testing-library/react-hooks": "^6.0.0",
+    "@testing-library/react-native": "^7.2.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^25.2.3",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.63.49",
-    "@types/react-test-renderer": "^16.9.2",
+    "@types/react-test-renderer": "^17.0.1",
     "@types/realm": "^1.13.0",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
@@ -80,6 +83,7 @@
     "typescript": "^3.8.3"
   },
   "jest": {
+    "verbose": true,
     "preset": "react-native",
     "moduleFileExtensions": [
       "ts",
