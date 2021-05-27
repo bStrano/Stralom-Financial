@@ -31,7 +31,6 @@ function ActionsButtons() {
             marginRight: 10,
           },
         }}
-        onPress={() => console.log('Edit Category')}
       />
     </View>
   );

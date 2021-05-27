@@ -10,23 +10,30 @@ interface ITransactionCategoryProviderProps {
 
 interface ITransactionCategoryContext {
   save: (transactionCategory: TransactionCategory) => Promise<void>;
+  remove: (transactionCategoryId: string) => Promise<void>;
   synchronize: () => Promise<Results<Object>>;
   categories: QueryObserverResult<Results<TransactionCategory>, TransactionCategory>;
 }
+
+const transactionCategoryController = new TransactionCategoryController();
 
 export const TransactionCategoryContext = createContext<ITransactionCategoryContext | null>(null);
 function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
   const categories = useQuery('categories', () => synchronize());
   async function save(transactionCategory: TransactionCategory) {
     try {
-      return await TransactionCategoryController.save(transactionCategory);
+      return await transactionCategoryController.save(transactionCategory);
     } catch (e) {
       console.error(e);
     }
   }
 
   async function synchronize() {
-    return await TransactionCategoryController.synchronize();
+    return await transactionCategoryController.synchronize();
+  }
+
+  async function remove(transactionCategoryId: string) {
+    return await transactionCategoryController.delete(transactionCategoryId);
   }
 
   // useEffect(() => {
@@ -36,7 +43,7 @@ function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
   //   });
   // }, []);
 
-  return <TransactionCategoryContext.Provider value={{save, categories, synchronize}}>{props.children}</TransactionCategoryContext.Provider>;
+  return <TransactionCategoryContext.Provider value={{save, remove, categories, synchronize}}>{props.children}</TransactionCategoryContext.Provider>;
 }
 
 export default TransactionCategoryProvider;

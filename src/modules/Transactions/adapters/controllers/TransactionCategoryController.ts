@@ -1,26 +1,26 @@
 import TransactionCategory from '../../models/TransactionCategory';
-import TransactionCategoryAPI from '../apis/TransactionCategoryAPI';
-import TransactionCategoryRepository from '../repositories/TransactionCategoryRepository';
-import Realm from 'realm';
+import TransactionCategoryService from '../../useCases/TransactionCategoryService';
 
 export default class TransactionCategoryController {
-  static async save(transactionCategory: TransactionCategory) {
-    await TransactionCategoryAPI.save(transactionCategory);
-    return await TransactionCategoryRepository.save(transactionCategory);
+  private readonly categoryService: TransactionCategoryService;
+
+  constructor() {
+    this.categoryService = new TransactionCategoryService();
   }
 
-  static async findAll() {
-    return await TransactionCategoryRepository.findAll();
+  async save(transactionCategory: TransactionCategory) {
+    await this.categoryService.save(transactionCategory);
   }
 
-  static async synchronize() {
-    try {
-      let data = await TransactionCategoryAPI.findAll();
-      await TransactionCategoryRepository.saveMultiple(data, Realm.UpdateMode.Modified);
-      return await TransactionCategoryRepository.findAll();
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
+  async findAll() {
+    return this.categoryService.findAll();
+  }
+
+  async synchronize() {
+    return this.categoryService.synchronize();
+  }
+
+  async delete(transactionCategoryId: string) {
+    return this.categoryService.delete(transactionCategoryId);
   }
 }
