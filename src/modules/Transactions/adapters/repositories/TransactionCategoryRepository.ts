@@ -34,4 +34,14 @@ export default class TransactionCategoryRepository {
     let realm = await getRealm();
     return realm.objects('TransactionCategory');
   }
+
+  static async delete(transactionCategoryId: string): Promise<void> {
+    let realm = await getRealm();
+    realm.write(() => {
+      let category = realm.objectForPrimaryKey('TransactionCategory', transactionCategoryId);
+      const transactionSubcategories = realm.objects('TransactionSubcategory').filtered(`category._id == "${transactionCategoryId}"`);
+      realm.delete(category);
+      realm.delete(transactionSubcategories);
+    });
+  }
 }

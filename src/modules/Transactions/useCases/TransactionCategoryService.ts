@@ -25,6 +25,7 @@ export default class TransactionCategoryService {
   }
 
   async delete(categoryId: string) {
-    throw new Error('Not implemented yet');
+    await TransactionCategoryAPI.delete(categoryId);
+    await TransactionCategoryRepository.delete(categoryId);
   }
 }

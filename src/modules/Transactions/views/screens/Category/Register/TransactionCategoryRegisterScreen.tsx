@@ -12,7 +12,6 @@ import IconSelectorModal from './IconSelectorModal/IconSelectorModal';
 import IconItem from './IconSelectorModal/IconItem/IconItem';
 import TransactionCategory from '../../../../models/TransactionCategory';
 import {TransactionCategoryContext} from '../../../../adapters/providers/TransactionCategoryProvider';
-import Reactotron from 'reactotron-react-native';
 import TransactionSubcategory from '../../../../models/TransactionSubcategory';
 
 interface ICategoryRegisterModalProps {}
@@ -48,7 +47,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
 
   // const onSubmit = (data) => Reactotron.log!(data);
   const onSubmit = (data: any) => {
-    transactionCategoryContext?.save(new TransactionCategory(data));
+    transactionCategoryContext?.save(new TransactionCategory({...data, color: data.color.color}));
     navigation.goBack();
   };
 
@@ -99,7 +98,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
                   name: 'paint-brush',
                   class: ICON_CLASS.FontAwesome,
                 }}
-                selectedComponent={<ColorItem color={value} selected={false} size={25} />}
+                selectedComponent={<ColorItem color={value.color} selected={false} size={25} />}
               />
               <ColorSelectorModal
                 title={intl!.commons.glossary.color}
@@ -112,7 +111,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
           )}
           name="color"
           rules={{required: true}}
-          defaultValue="#75746e"
+          defaultValue={{key: '#75746e', color: '#75746e'}}
         />
 
         <Controller
@@ -128,10 +127,10 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
                 onChange={onChange}
                 onBlur={onBlur}
                 icon={{name: 'icons', class: ICON_CLASS.FontAwesome5}}
-                selectedComponent={<IconItem size={25} icon={value} color={control.fieldsRef.current.color!._f.value} fontColor={'white'} selected={false} />}
+                selectedComponent={<IconItem size={25} icon={value} color={control.fieldsRef.current.color!._f.value.color} fontColor={'white'} selected={false} />}
               />
               <IconSelectorModal
-                color={control.fieldsRef.current.color!._f.value}
+                color={control.fieldsRef.current.color!._f.value.color.color}
                 title={intl!.commons.glossary.icon}
                 onChange={onChange}
                 setVisibility={setIconPickerVisibility}
@@ -155,8 +154,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
                 initialValue={value}
                 placeholder={'Adicionar subcategorias'}
                 onItemChange={(data) => {
-                  Reactotron.log!(data);
-                  let subcategories = data.map((item) => {
+                  let subcategories = data.map((item: TransactionSubcategory | {key: string; value: string}) => {
                     if (item instanceof TransactionSubcategory) {
                       return item;
                     } else {

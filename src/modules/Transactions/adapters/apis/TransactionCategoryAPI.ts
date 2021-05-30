@@ -43,6 +43,11 @@ class TransactionCategoryAPI {
     Reactotron.log!(data);
     return transactionCategory;
   }
+
+  static async delete(transactionCategoryId: string) {
+    const {data} = await axiosCore.delete(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY + '/' + transactionCategoryId, {params: {cascade: true}});
+    return data;
+  }
 }
 
 export default TransactionCategoryAPI;

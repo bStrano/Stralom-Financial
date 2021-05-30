@@ -14,13 +14,12 @@ function TransactionCategoryScreen() {
   const navigation = useNavigation();
   const transactionCategoryContext = useContext(TransactionCategoryContext);
   const theme = useTheme();
-
   return (
     <MenuProvider>
       <View style={{flex: 1, backgroundColor: theme.surface}}>
         <BaseHeader title={'Minhas categorias'} type={NAVIGATION_TYPE.BACK} />
-        <FlatList keyExtractor={(item) => item.name} data={transactionCategoryContext?.categories.data} renderItem={({item}) => <CategoryItem category={item} />} />
-        <FAB onPress={() => navigation.navigate(ScreenEnum.TransactionCategoryRegistration)} />
+        <FlatList keyExtractor={(item) => item._id!.toString()} data={transactionCategoryContext?.categories.data} renderItem={({item}) => <CategoryItem category={item} />} />
+        <FAB onPress={() => navigation.navigate(ScreenEnum.TransactionCategoryRegistration)} backgroundColor={theme.primary.main.color} />
       </View>
     </MenuProvider>
   );

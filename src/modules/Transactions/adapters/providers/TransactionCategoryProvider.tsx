@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React, {createContext, useState} from 'react';
 import TransactionCategory from '../../models/TransactionCategory';
 import TransactionCategoryController from '../controllers/TransactionCategoryController';
 import {Results} from 'realm';
@@ -20,6 +20,7 @@ const transactionCategoryController = new TransactionCategoryController();
 export const TransactionCategoryContext = createContext<ITransactionCategoryContext | null>(null);
 function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
   const categories = useQuery('categories', () => synchronize());
+  const [, setForceRefresh] = useState('');
   async function save(transactionCategory: TransactionCategory) {
     try {
       return await transactionCategoryController.save(transactionCategory);
@@ -33,7 +34,9 @@ function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
   }
 
   async function remove(transactionCategoryId: string) {
-    return await transactionCategoryController.delete(transactionCategoryId);
+    await transactionCategoryController.delete(transactionCategoryId);
+    // TODO: Analisar futuramente por que o Realm não está atualizando o FlatList sozinho e está sendo necessário forçar o refresh
+    setForceRefresh(Math.random().toString());
   }
 
   // useEffect(() => {
