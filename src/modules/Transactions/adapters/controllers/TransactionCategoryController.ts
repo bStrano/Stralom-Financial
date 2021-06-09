@@ -12,6 +12,10 @@ export default class TransactionCategoryController {
     await this.categoryService.save(transactionCategory);
   }
 
+  async update(transactionCategory: TransactionCategory) {
+    await this.categoryService.update(transactionCategory);
+  }
+
   async findAll() {
     return this.categoryService.findAll();
   }

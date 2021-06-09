@@ -8,6 +8,8 @@ import ActionsButtons from './components/ActionsButtons';
 import {Menu, MenuOption, MenuOptions, MenuTrigger} from 'react-native-popup-menu';
 import useLocale from '../../../../../../../../shared/hooks/useLocale';
 import {TransactionCategoryContext} from '../../../../../../adapters/providers/TransactionCategoryProvider';
+import ScreenEnum from '../../../../../../../../shared/enums/ScreenEnum';
+import {useNavigation} from '@react-navigation/native';
 
 interface ICategoryItemProps {
   category: TransactionCategory;
@@ -15,8 +17,9 @@ interface ICategoryItemProps {
 
 function CategoryItem(props: ICategoryItemProps) {
   const {intl} = useLocale();
+  const navigation = useNavigation();
   const transactionCategoryContext = useContext(TransactionCategoryContext);
-
+  console.log(props);
   const onCancel = useCallback(() => {
     Alert.alert(intl?.category.delete.title + ' ' + props.category.name, intl?.category.delete.confirmation + '?', [
       {
@@ -36,6 +39,22 @@ function CategoryItem(props: ICategoryItemProps) {
     ]);
   }, [intl, props.category._id, props.category.name]);
 
+  const onEdit = useCallback(() => {
+    navigation.navigate(ScreenEnum.TransactionCategoryRegistration, {category: props.category});
+  }, [navigation, props.category]);
+
+  const onActionTrigger = useCallback(
+    (value) => {
+      switch (value) {
+        case 1:
+          return onEdit();
+        case 2:
+          return onCancel;
+      }
+    },
+    [onCancel, onEdit],
+  );
+
   return (
     <View>
       <View style={styles.container}>
@@ -44,7 +63,7 @@ function CategoryItem(props: ICategoryItemProps) {
           {props.category.name}
         </Text>
 
-        <Menu onSelect={(value) => onCancel()} style={{marginRight: 10}}>
+        <Menu onSelect={onActionTrigger} style={{marginRight: 10}}>
           <MenuTrigger>
             <ActionsButtons />
           </MenuTrigger>

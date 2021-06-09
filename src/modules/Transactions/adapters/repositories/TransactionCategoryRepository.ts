@@ -2,6 +2,7 @@ import TransactionCategory from '../../models/TransactionCategory';
 import getRealm from '../../../../shared/infra/realm/realm';
 import Reactotron from 'reactotron-react-native';
 import Realm, {Results} from 'realm';
+import TransactionSubcategory from '../../models/TransactionSubcategory';
 
 export default class TransactionCategoryRepository {
   static async save(transactionCategory: TransactionCategory) {
@@ -9,6 +10,30 @@ export default class TransactionCategoryRepository {
     let realm = await getRealm();
     realm.write(() => {
       realm.create('TransactionCategory', transactionCategory);
+    });
+  }
+
+  static async update(transactionCategory: TransactionCategory) {
+    Reactotron.log!('Update', transactionCategory);
+    let realm = await getRealm();
+    realm.write(() => {
+      let category = <TransactionCategory>realm.objectForPrimaryKey('TransactionCategory', transactionCategory._id!.toString());
+      if (!category) {
+        throw new Error('Not found');
+      }
+      category.icon = transactionCategory.icon;
+      category.color = transactionCategory.color;
+      category.name = transactionCategory.name;
+      let newSubcategories: TransactionSubcategory[] = [];
+      transactionCategory.subcategories?.forEach((subcategory) => {
+        let subcategoryRealm = category.subcategories?.find((item) => item._id === subcategory._id);
+        if (!subcategoryRealm) {
+          newSubcategories.push(subcategory);
+        } else {
+          subcategoryRealm.name = subcategory.name;
+        }
+      });
+      transactionCategory.subcategories?.push(['test']);
     });
   }
 

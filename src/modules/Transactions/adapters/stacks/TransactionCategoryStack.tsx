@@ -6,8 +6,14 @@ import TransactionCategoryRegisterScreen from '../../views/screens/Category/Regi
 import TransactionCategoryScreen from '../../views/screens/Category/List/TransactionCategoryScreen';
 import ScreenEnum from '../../../../shared/enums/ScreenEnum';
 import TransactionCategoryProvider from '../providers/TransactionCategoryProvider';
+import TransactionCategory from '../../models/TransactionCategory';
 
-const Stack = createStackNavigator();
+type TransactionCategoryStackParamList = {
+  TransactionCategory: undefined;
+  TransactionCategoryRegistration: {category?: TransactionCategory} | undefined;
+};
+
+const Stack = createStackNavigator<TransactionCategoryStackParamList>();
 function TransactionCategoryStack() {
   return (
     <TransactionCategoryProvider>

@@ -44,6 +44,12 @@ class TransactionCategoryAPI {
     return transactionCategory;
   }
 
+  static async update(transactionCategory: TransactionCategory) {
+    const {data} = await axiosCore.patch(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY + '/' + transactionCategory._id, {...transactionCategory, icon: transactionCategory.icon.id});
+    Reactotron.log!(data);
+    return transactionCategory;
+  }
+
   static async delete(transactionCategoryId: string) {
     const {data} = await axiosCore.delete(ENDPOINTS.ROUTES.TRANSACTION_CATEGORY + '/' + transactionCategoryId, {params: {cascade: true}});
     return data;

@@ -9,6 +9,11 @@ export default class TransactionCategoryService {
     return await TransactionCategoryRepository.save(transactionCategory);
   }
 
+  async update(transactionCategory: TransactionCategory) {
+    await TransactionCategoryAPI.update(transactionCategory);
+    return await TransactionCategoryRepository.update(transactionCategory);
+  }
+
   async findAll() {
     return await TransactionCategoryRepository.findAll();
   }

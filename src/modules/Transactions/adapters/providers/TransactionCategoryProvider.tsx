@@ -10,6 +10,7 @@ interface ITransactionCategoryProviderProps {
 
 interface ITransactionCategoryContext {
   save: (transactionCategory: TransactionCategory) => Promise<void>;
+  update: (transactionCategory: TransactionCategory) => Promise<void>;
   remove: (transactionCategoryId: string) => Promise<void>;
   synchronize: () => Promise<Results<Object>>;
   categories: QueryObserverResult<Results<TransactionCategory>, TransactionCategory>;
@@ -29,6 +30,10 @@ function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
     }
   }
 
+  async function update(transactionCategory: TransactionCategory) {
+    return await transactionCategoryController.update(transactionCategory);
+  }
+
   async function synchronize() {
     return await transactionCategoryController.synchronize();
   }
@@ -46,7 +51,7 @@ function TransactionCategoryProvider(props: ITransactionCategoryProviderProps) {
   //   });
   // }, []);
 
-  return <TransactionCategoryContext.Provider value={{save, remove, categories, synchronize}}>{props.children}</TransactionCategoryContext.Provider>;
+  return <TransactionCategoryContext.Provider value={{save, remove, update, categories, synchronize}}>{props.children}</TransactionCategoryContext.Provider>;
 }
 
 export default TransactionCategoryProvider;

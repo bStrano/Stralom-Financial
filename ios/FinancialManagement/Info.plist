@@ -72,5 +72,7 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>CFBundleShortVersionString</key>
+    <string>1.0</string>
 </dict>
 </plist>

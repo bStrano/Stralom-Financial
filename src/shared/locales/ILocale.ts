@@ -6,6 +6,9 @@ export default interface ILocale {
     registration: {
       title: string;
     };
+    update: {
+      title: string;
+    };
     delete: {
       title: string;
       confirmation: string;

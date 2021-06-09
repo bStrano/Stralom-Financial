@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Dimensions, Keyboard, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
+import {Dimensions, Keyboard, ScrollView, StyleSheet, View} from 'react-native';
 import {CheckList, FAB, Header, ICON_CLASS, SHADOW, useTheme} from 'react-native-stralom-components';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import useLocale from '../../../../../../shared/hooks/useLocale';
 import TextInputCL from './TextInput/TextInputCL';
 import {Controller, useForm} from 'react-hook-form';
@@ -14,12 +14,27 @@ import TransactionCategory from '../../../../models/TransactionCategory';
 import {TransactionCategoryContext} from '../../../../adapters/providers/TransactionCategoryProvider';
 import TransactionSubcategory from '../../../../models/TransactionSubcategory';
 
-interface ICategoryRegisterModalProps {}
+interface ITransactionCategoryRegisterScreen {}
 
-function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
+function TransactionCategoryRegisterScreen(props: ITransactionCategoryRegisterScreen) {
   const {intl} = useLocale();
   const theme = useTheme();
   const navigation = useNavigation();
+  const route = useRoute();
+  const category = route.params?.category;
+  console.log('Subcategories', category?.subcategories);
+  const initialSubcategories = category?.subcategories?.map((item) => {
+    return {
+      _id: item._id,
+      value: item.name,
+    };
+  });
+
+  const updateMode = useMemo(() => {
+    return category != null;
+  }, []);
+
+  console.log('SUBCATEGORIES2', initialSubcategories);
   const transactionCategoryContext = useContext(TransactionCategoryContext);
   const {
     control,
@@ -47,14 +62,20 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
 
   // const onSubmit = (data) => Reactotron.log!(data);
   const onSubmit = (data: any) => {
-    transactionCategoryContext?.save(new TransactionCategory({...data, color: data.color.color}));
+    let transactionCategory = new TransactionCategory({...data, color: data.color.color});
+    if (updateMode) {
+      transactionCategoryContext?.update(transactionCategory);
+    } else {
+      transactionCategoryContext?.save(transactionCategory);
+    }
+
     navigation.goBack();
   };
 
   return (
     <View style={styles.view}>
       <Header
-        title={intl!.category.registration.title}
+        title={updateMode ? intl!.category.update.title : intl!.category.registration.title}
         fontFamily={'Montserrat-Medium'}
         fontColor={'black'}
         iconLeft={{
@@ -80,7 +101,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
           )}
           name="name"
           rules={{required: true}}
-          defaultValue=""
+          defaultValue={category?.name}
         />
 
         <Controller
@@ -111,7 +132,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
           )}
           name="color"
           rules={{required: true}}
-          defaultValue={{key: '#75746e', color: '#75746e'}}
+          defaultValue={{key: category?.color || '#75746e', color: category?.color || '#75746e'}}
         />
 
         <Controller
@@ -140,7 +161,7 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
           )}
           name="icon"
           rules={{required: true}}
-          defaultValue={{id: -1, name: 'emoji-flirt', class: ICON_CLASS.Entypo}}
+          defaultValue={{id: category?.icon.id, name: category?.icon.name, class: category?.icon.class} || {id: -1, name: 'emoji-flirt', class: ICON_CLASS.Entypo}}
         />
 
         <Controller
@@ -148,12 +169,14 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
           render={({field: {onChange, value}}) => (
             <View style={{paddingVertical: 10}}>
               <CheckList
+                itemKey="_id"
                 fontFamily={theme.primary.main.font}
                 accentColor={theme.primary.main.color}
                 fontSize={14}
-                initialValue={value}
+                initialValue={initialSubcategories}
                 placeholder={'Adicionar subcategorias'}
                 onItemChange={(data) => {
+                  console.log('ON ITEM CHANGE', data);
                   let subcategories = data.map((item: TransactionSubcategory | {key: string; value: string}) => {
                     if (item instanceof TransactionSubcategory) {
                       return item;
@@ -168,12 +191,11 @@ function TransactionCategoryRegisterScreen(props: ICategoryRegisterModalProps) {
                 showCheckbox={false}
                 focusOnSubmit={false}
               />
-              <Text />
             </View>
           )}
           name="subcategories"
           rules={{required: false}}
-          defaultValue={[]}
+          defaultValue={category?.subcategories ? category.subcategories : []}
         />
       </ScrollView>
 

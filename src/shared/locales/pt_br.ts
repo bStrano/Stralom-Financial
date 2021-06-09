@@ -5,6 +5,7 @@ const commons = {
   common: {
     create: 'Criar',
     save: 'Salvar',
+    update: 'Atualizar',
     cancel: 'Cancelar',
     delete: 'Remover',
   },
@@ -28,6 +29,9 @@ const pt_br: ILocale = {
   category: {
     registration: {
       title: _.capitalize(`${commons.common.create} nova ${commons.glossary.category}`),
+    },
+    update: {
+      title: _.capitalize(`${commons.common.update} ${commons.glossary.category}`),
     },
     delete: {
       title: `${commons.common.delete} ${commons.glossary.category.toLowerCase()}`,
