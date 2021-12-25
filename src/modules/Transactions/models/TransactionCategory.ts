@@ -28,6 +28,7 @@ class TransactionCategory {
     this.icon = icon;
     this.subcategories = subcategories;
     if (!_id) {
+      console.log('Generate Random UUID');
       this._id = uuidv4();
     } else {
       this._id = _id;

@@ -12,6 +12,10 @@ const commons = {
   validation: {
     generic: 'Ops! Falha ao prosseguir, tente novamente mais tarde.',
   },
+  errors: {
+    requestTitle: 'Ops, ocorreu algo de errado',
+    requestSubtitle: 'Tente novamente em alguns instantes.',
+  },
   glossary: {
     home: 'Home',
     transaction: 'Transação',

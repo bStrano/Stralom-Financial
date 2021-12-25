@@ -1,4 +1,3 @@
-import TransactionCategory from '../../models/TransactionCategory';
 import TransactionCategoryService from '../../useCases/TransactionCategoryService';
 
 export default class TransactionCategoryController {
@@ -8,11 +7,11 @@ export default class TransactionCategoryController {
     this.categoryService = new TransactionCategoryService();
   }
 
-  async save(transactionCategory: TransactionCategory) {
+  async save(transactionCategory: ITransactionCategory) {
     await this.categoryService.save(transactionCategory);
   }
 
-  async update(transactionCategory: TransactionCategory) {
+  async update(transactionCategory: ITransactionCategory) {
     await this.categoryService.update(transactionCategory);
   }
 

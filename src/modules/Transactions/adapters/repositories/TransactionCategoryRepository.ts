@@ -14,7 +14,6 @@ export default class TransactionCategoryRepository {
   }
 
   static async update(transactionCategory: TransactionCategory) {
-    Reactotron.log!('Update', transactionCategory);
     let realm = await getRealm();
     realm.write(() => {
       let category = <TransactionCategory>realm.objectForPrimaryKey('TransactionCategory', transactionCategory._id!.toString());
@@ -43,7 +42,7 @@ export default class TransactionCategoryRepository {
       transactionCategories.forEach((transactionCategory) => {
         // @ts-ignore
         const transactionCategoryNew = <Realm.Object<TransactionCategory>>realm.create(TransactionCategory.collectionName, transactionCategory, update);
-        console.log(transactionCategoryNew);
+        console.log('Transaction Categort News', transactionCategoryNew);
         // transactionCategoryNew.subcategories = transactionCategoryNew.subcategories!.map((transactionSubcategory: TransactionSubcategory) => {
         //   return new TransactionSubcategory({
         //     _id: transactionSubcategory._id,

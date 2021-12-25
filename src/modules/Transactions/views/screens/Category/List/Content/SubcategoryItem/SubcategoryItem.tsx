@@ -1,10 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-stralom-components';
-import TransactionSubcategory from '../../../../../../models/TransactionSubcategory';
 
 interface ISubcategoryItemProps {
-  subcategory: TransactionSubcategory;
+  subcategory: ITransactionCategory;
 }
 
 function SubcategoryItem(props: ISubcategoryItemProps) {

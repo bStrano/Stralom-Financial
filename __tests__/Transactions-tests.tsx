@@ -1,9 +1,9 @@
 import TransactionCategoryScreen
-  from '../src/modules/Transactions/views/screens/Category/List/TransactionCategoryScreen';
+    from '../src/modules/Transactions/views/screens/Category/List/TransactionCategoryScreen';
 import renderer from 'react-test-renderer';
 import React from 'react';
 import TransactionCategoryRegisterScreen
-  from '../src/modules/Transactions/views/screens/Category/Register/TransactionCategoryRegisterScreen';
+    from '../src/modules/Transactions/views/screens/Category/Register/TransactionCategoryRegisterScreen';
 import pt_br from '../src/shared/locales/pt_br';
 
 jest.mock('@react-navigation/native', () => {

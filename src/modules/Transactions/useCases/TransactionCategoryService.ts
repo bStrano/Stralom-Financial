@@ -1,15 +1,14 @@
-import TransactionCategory from '../models/TransactionCategory';
 import TransactionCategoryAPI from '../adapters/apis/TransactionCategoryAPI';
 import TransactionCategoryRepository from '../adapters/repositories/TransactionCategoryRepository';
 import Realm from 'realm';
 
 export default class TransactionCategoryService {
-  async save(transactionCategory: TransactionCategory) {
+  async save(transactionCategory: ITransactionCategory) {
     await TransactionCategoryAPI.save(transactionCategory);
     return await TransactionCategoryRepository.save(transactionCategory);
   }
 
-  async update(transactionCategory: TransactionCategory) {
+  async update(transactionCategory: ITransactionCategory) {
     await TransactionCategoryAPI.update(transactionCategory);
     return await TransactionCategoryRepository.update(transactionCategory);
   }

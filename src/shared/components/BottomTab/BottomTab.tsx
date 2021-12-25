@@ -47,8 +47,7 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
             actions={[
               {
                 label: 'CategoriasTemp',
-                onPress: () =>
-                  navigation.navigate(NavigatorEnum.TransactionCategoryStack),
+                onPress: () => navigation.navigate(NavigatorEnum.TransactionCategoryStack),
                 icon: {
                   size: 28,
                   name: 'calendar',
@@ -101,7 +100,7 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
               },
             ]}
             fab={{
-              backgroundColor: theme.primary.light.color,
+              backgroundColor: theme?.primary.light.color,
               position: {
                 bottom: 20,
                 left: 0,
@@ -115,8 +114,8 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
             name: 'pie-chart',
             class: 'Feather',
           }}
-          color={theme.primary.textColor}
-          toggledColor={theme.primary.main.color}
+          color={theme?.primary.textColor}
+          toggledColor={theme?.primary.main.color}
           index={2}
         />
         <Tab
@@ -124,8 +123,8 @@ function BottomTab({state, descriptors, navigation}: BottomTabBarProps) {
             name: 'dots-horizontal',
             class: 'MaterialCommunityIcons',
           }}
-          color={theme.primary.textColor}
-          toggledColor={theme.primary.main.color}
+          color={theme?.primary.textColor}
+          toggledColor={theme?.primary.main.color}
           index={3}
         />
       </View>

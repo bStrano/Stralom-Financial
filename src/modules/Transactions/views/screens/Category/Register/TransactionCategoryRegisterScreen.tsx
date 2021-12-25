@@ -10,9 +10,7 @@ import ColorSelectorModal from './ColorSelectorModal/ColorSelectorModal';
 import ColorItem from './ColorSelectorModal/ColorItem/ColorItem';
 import IconSelectorModal from './IconSelectorModal/IconSelectorModal';
 import IconItem from './IconSelectorModal/IconItem/IconItem';
-import TransactionCategory from '../../../../models/TransactionCategory';
 import {TransactionCategoryContext} from '../../../../adapters/providers/TransactionCategoryProvider';
-import TransactionSubcategory from '../../../../models/TransactionSubcategory';
 
 interface ITransactionCategoryRegisterScreen {}
 
@@ -22,10 +20,10 @@ function TransactionCategoryRegisterScreen(props: ITransactionCategoryRegisterSc
   const navigation = useNavigation();
   const route = useRoute();
   const category = route.params?.category;
-  console.log('Subcategories', category?.subcategories);
+
   const initialSubcategories = category?.subcategories?.map((item) => {
     return {
-      _id: item._id,
+      id: item.id,
       value: item.name,
     };
   });
@@ -34,7 +32,6 @@ function TransactionCategoryRegisterScreen(props: ITransactionCategoryRegisterSc
     return category != null;
   }, []);
 
-  console.log('SUBCATEGORIES2', initialSubcategories);
   const transactionCategoryContext = useContext(TransactionCategoryContext);
   const {
     control,
@@ -62,14 +59,22 @@ function TransactionCategoryRegisterScreen(props: ITransactionCategoryRegisterSc
 
   // const onSubmit = (data) => Reactotron.log!(data);
   const onSubmit = (data: any) => {
-    let transactionCategory = new TransactionCategory({...data, color: data.color.color});
-    if (updateMode) {
-      transactionCategoryContext?.update(transactionCategory);
-    } else {
-      transactionCategoryContext?.save(transactionCategory);
-    }
+    try {
+      let transactionCategory: ITransactionCategory = {...data, color: data.color.color};
 
-    navigation.goBack();
+      if (updateMode) {
+        transactionCategory.id = category.id;
+        transactionCategoryContext?.update(transactionCategory, () => {
+          navigation.goBack();
+        });
+      } else {
+        transactionCategoryContext?.save(transactionCategory, () => {
+          navigation.goBack();
+        });
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -151,7 +156,7 @@ function TransactionCategoryRegisterScreen(props: ITransactionCategoryRegisterSc
                 selectedComponent={<IconItem size={25} icon={value} color={control.fieldsRef.current.color!._f.value.color} fontColor={'white'} selected={false} />}
               />
               <IconSelectorModal
-                color={control.fieldsRef.current.color!._f.value.color.color}
+                color={control.fieldsRef.current.color!._f.value.color}
                 title={intl!.commons.glossary.icon}
                 onChange={onChange}
                 setVisibility={setIconPickerVisibility}
@@ -169,19 +174,19 @@ function TransactionCategoryRegisterScreen(props: ITransactionCategoryRegisterSc
           render={({field: {onChange, value}}) => (
             <View style={{paddingVertical: 10}}>
               <CheckList
-                itemKey="_id"
+                itemKey="id"
                 fontFamily={theme.primary.main.font}
                 accentColor={theme.primary.main.color}
                 fontSize={14}
                 initialValue={initialSubcategories}
                 placeholder={'Adicionar subcategorias'}
                 onItemChange={(data) => {
-                  console.log('ON ITEM CHANGE', data);
-                  let subcategories = data.map((item: TransactionSubcategory | {key: string; value: string}) => {
-                    if (item instanceof TransactionSubcategory) {
-                      return item;
+                  let subcategories = data.map((item: ITransactionSubcategory | {key: string; value: string}) => {
+                    if ('_id' in item) {
+                      const itemData = item as {key: string; value: string};
+                      return {name: itemData.value, category: undefined};
                     } else {
-                      return new TransactionSubcategory({name: item.value, category: undefined});
+                      return item;
                     }
                   });
 

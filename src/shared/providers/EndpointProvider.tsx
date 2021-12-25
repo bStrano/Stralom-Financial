@@ -39,12 +39,12 @@ function EndpointProvider(props: IEndpointProviderProps) {
       async (error) => {
         const originalRequest = error.config;
         let authenticationRoute = `${ENDPOINTS.AUTHENTICATION}/session/token`;
-        if (error.response.status === 403 && originalRequest.url === authenticationRoute) {
+        if (error.response?.status === 403 && originalRequest.url === authenticationRoute) {
           sessionContext?.clearSession();
           return Promise.reject(error);
         }
 
-        if (error.response.status === 403 && !originalRequest._retry) {
+        if (error.response?.status === 403 && !originalRequest._retry) {
           originalRequest._retry = true;
           let token = await restoreRefreshToken();
           let res = await axios.post(authenticationRoute, {token});

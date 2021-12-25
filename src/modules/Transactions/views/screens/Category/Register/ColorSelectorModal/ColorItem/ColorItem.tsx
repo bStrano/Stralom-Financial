@@ -10,6 +10,7 @@ interface IColorItemProps {
 }
 
 function ColorItem(props: IColorItemProps) {
+  console.log('COLOR: ', props.color);
   return (
     <Pressable onPress={props.onPress} disabled={!props.onPress}>
       <View
@@ -24,14 +25,7 @@ function ColorItem(props: IColorItemProps) {
           borderRadius: props.size && props.size / 2,
           backgroundColor: props.color,
         }}>
-        {props.selected && (
-          <Icon
-            name={'check'}
-            color={'white'}
-            class={ICON_CLASS.Octicons}
-            size={props.size && props.size / 2}
-          />
-        )}
+        {props.selected && <Icon name={'check'} color={'white'} class={ICON_CLASS.Octicons} size={props.size && props.size / 2} />}
       </View>
     </Pressable>
   );

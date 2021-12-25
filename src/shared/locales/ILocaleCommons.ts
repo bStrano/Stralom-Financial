@@ -6,6 +6,10 @@ export default interface ILocaleCommons {
   validation: {
     generic: string;
   };
+  errors: {
+    requestTitle: string;
+    requestSubtitle: string;
+  };
   glossary: {
     home: string;
     transaction: string;
