@@ -34,7 +34,7 @@
     "lottie-react-native": "^3.5.0",
     "react": "^17.0.2",
     "react-hook-form": "^7.3.4",
-    "react-native": "0.63.3",
+    "react-native": "0.66.4",
     "react-native-authentication-module": "E:\\Projetos\\Authentication-Module",
     "react-native-code-push": "^7.0.0",
     "react-native-fbsdk": "^3.0.0",
@@ -52,7 +52,6 @@
     "react-native-twitter-signin": "^1.1.1",
     "react-native-vector-icons": "^8.0.0",
     "react-query": "^3.15.2",
-    "realm": "^10.3.0",
     "styled-components": "^5.2.1",
     "uuid": "^8.3.2"
   },
@@ -78,8 +77,8 @@
     "babel-jest": "^25.1.0",
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-test-renderer": "16.13.1",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.2",
     "reactotron-react-native": "^5.0.0",
     "typescript": "^3.8.3"
   },
